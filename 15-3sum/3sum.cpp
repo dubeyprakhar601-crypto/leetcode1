@@ -22,9 +22,7 @@ public:
                     while(st<end && nums[st-1]==nums[st]){
                         st++;
                     }
-                    while(st<end && nums[end]==nums[end+1]){
-                        end--;
-                    }
+                    
                 }
                 else if(tar<nums[st]+nums[end]){
                     end--;
