@@ -1,49 +1,43 @@
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        sort(nums.begin(),nums.end());
-        vector<vector<int>>arr;
-        vector<int>ans;
+        int n = nums.size();
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
 
+        for (int i = 0; i < n; i++) {
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            for (int j = i + 1; j < n;) {
 
-        int n=nums.size();
+                int p = j + 1;
+                int q = n - 1;
+                while (p < q) {
 
-        for(int i=0;i<n;i++){
-            long long  tar1=target-nums[i];
-            if(i>0 && nums[i]==nums[i-1]) continue;
+                    long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[p] + (long long)nums[q];
 
-            for(int j=i+1;j<n;j++){
-                if (j > i + 1 && nums[j] == nums[j-1])
-                 continue;
-                long long  tar2=tar1-nums[j];
+                    if (sum == target) {
 
-                int st=j+1;
-                int end=n-1;
-                while(st<end){
-                if(tar2==nums[st]+nums[end]){
-                    vector<int>ans={nums[i],nums[j],nums[st],nums[end]};
-                    arr.push_back(ans);
-                    st++;
-                    end--;
-                    while (st < end && nums[st] == nums[st-1])
-                     st++;
+                        ans.push_back({nums[i], nums[j], nums[p], nums[q]});
+                        p++;
+                        q--;
+                        while (p < q && nums[p] == nums[p - 1])
+                            p++;
+                        while (p < q && nums[q] == nums[q + 1])
+                            q--;
 
-                    while (st < end && nums[end] == nums[end+1])
-                     end--;
+                    } else if (sum < target) {
+                        p++;
+
+                    } else {
+                        q--;
+                    }
                 }
-                else if(tar2<nums[st]+nums[end]){
-
-                    end--;
-
-                }
-                else{
-                    st++;
-                }
-                }
+                j++;
+                while (j < n && nums[j] == nums[j - 1])
+                    j++;
             }
-            
         }
-        return arr;
-        
+        return ans;
     }
 };
