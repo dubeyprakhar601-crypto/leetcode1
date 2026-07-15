@@ -1,18 +1,19 @@
 class Solution {
 public:
     bool isGood(vector<int>& nums) {
-        unordered_map<int,int>mp;
         int n=nums.size();
-        for(int i=0;i<nums.size();i++){
+        int i=0;
+        unordered_set<int>s;
+        while(i<n){
             if(nums[i]>n-1) return false;
-            mp[nums[i]]++;
-
-        }
-        for(auto it:mp){
-            if(it.first!=n-1 && it.second>1){
+            if(s.find(nums[i])!=s.end() && nums[i]!=n-1){
                 return false;
             }
+            s.insert(nums[i]);
+            i++;
         }
+        if(s.size()!=n-1) return false;
         return true;
+        
     }
 };
