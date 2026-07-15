@@ -1,19 +1,14 @@
 class Solution {
 public:
     bool isGood(vector<int>& nums) {
+        long long count=0;
         int n=nums.size();
-        int i=0;
-        unordered_set<int>s;
-        while(i<n){
-            if(nums[i]>n-1) return false;
-            if(s.find(nums[i])!=s.end() && nums[i]!=n-1){
-                return false;
-            }
-            s.insert(nums[i]);
-            i++;
+        for(int i=0;i<n;i++){
+            count+=nums[i];
+
         }
-        if(s.size()!=n-1) return false;
-        return true;
+        if(count==((n*n+n-2)/2)) return true ;
+        return false;
         
     }
 };
