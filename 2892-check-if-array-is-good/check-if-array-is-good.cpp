@@ -1,14 +1,18 @@
 class Solution {
 public:
     bool isGood(vector<int>& nums) {
-        long long count=0;
+        unordered_map<int,int>mp;
         int n=nums.size();
-        for(int i=0;i<n;i++){
-            count+=nums[i];
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>n-1) return false;
+            mp[nums[i]]++;
 
         }
-        if(count==((n*n+n-2)/2)) return true ;
-        return false;
-        
+        for(auto it:mp){
+            if(it.first!=n-1 && it.second>1){
+                return false;
+            }
+        }
+        return true;
     }
 };
