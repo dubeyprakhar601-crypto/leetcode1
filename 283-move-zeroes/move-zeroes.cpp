@@ -7,15 +7,13 @@ public:
         while(i<n){
             if(nums[i]!=0){
                 nums[j]=nums[i];
+                if(i!=j){
+                nums[i]=0;
+                }
                 j++;
             }
             i++;
-            if(i>=n){
-                while(j<n){
-                    nums[j]=0;
-                    j++;
-                }
-            }
+            
         }
         
         
