@@ -6,10 +6,7 @@ public:
         int j=0;
         while(i<n){
             if(nums[i]!=0){
-                nums[j]=nums[i];
-                if(i!=j){
-                nums[i]=0;
-                }
+                swap(nums[i],nums[j]);
                 j++;
             }
             i++;
