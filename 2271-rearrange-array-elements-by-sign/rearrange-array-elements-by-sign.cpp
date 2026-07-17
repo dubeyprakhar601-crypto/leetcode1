@@ -4,19 +4,18 @@ public:
         int n=nums.size();
         int i=0;
         int j=0;
-        vector<int>ans;
-        while(j<n && i<n){
-            while(nums[i]< 0 ) {
-                i++;
-            }while(nums[j]>0 ) {
-                j++;
+        int k=1;
+        vector<int>ans(n,0);
+        while(i<n){
+            if(nums[i]>0){
+                ans[j]=nums[i];
+                j+=2;
+            }else{
+                ans[k]=nums[i];
+                k+=2;
             }
-            ans.push_back(nums[i]);
-            ans.push_back(nums[j]);
             i++;
-            j++;
         }
         return ans;
-        
     }
 };
