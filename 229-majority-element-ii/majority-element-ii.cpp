@@ -1,23 +1,25 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        unordered_map<int ,int>map;
-        unordered_set<int>s;
-        vector<int>vec;
-        for(int i=0;i<nums.size();i++){
-            map[nums[i]]+=1;
-            if(map[nums[i]]>nums.size()/3){
-                s.insert(nums[i]);
+        unordered_map<int, int> map;
+        vector<int> vec;
+        int count =0;
+        for (int i = 0; i < nums.size(); i++) {
+            map[nums[i]] += 1;
+            if (map[nums[i]] > nums.size() / 3) {
+                if (count == 0) {
+                    vec.push_back(nums[i]);
+                    count++;
+                } else {
+                    if (nums[i] != vec[0]) {
+                        vec.push_back(nums[i]);
+                    }
+                }
             }
-            if(s.size()==2){
+            if (vec.size() == 2) {
                 break;
             }
-
-        }
-        for(auto it:s){
-            vec.push_back(it);
         }
         return vec;
-        
     }
 };
