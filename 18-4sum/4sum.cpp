@@ -2,42 +2,39 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         int n = nums.size();
-        vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
+        vector<vector<int>> vec;
 
-        for (int i = 0; i < n; i++) {
-            if (i > 0 && nums[i] == nums[i - 1])
+        for (int i = 0; i < n-3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
-            for (int j = i + 1; j < n;) {
-
-                int p = j + 1;
-                int q = n - 1;
-                while (p < q) {
-
-                    long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[p] + (long long)nums[q];
-
+            }
+            for (int j = i + 1; j < n-2; j++) {
+                if (j>i+1 && nums[j] == nums[j - 1]  )
+                    continue;
+                int st = j + 1;
+                int end = n - 1;
+                while (st < end) {
+                    long long sum = (long long )nums[i] + (long long )nums[j] + (long long )nums[st] + (long long )nums[end];
                     if (sum == target) {
+                        vec.push_back({nums[i], nums[j], nums[st], nums[end]});
 
-                        ans.push_back({nums[i], nums[j], nums[p], nums[q]});
-                        p++;
-                        q--;
-                        while (p < q && nums[p] == nums[p - 1])
-                            p++;
-                        while (p < q && nums[q] == nums[q + 1])
-                            q--;
-
+                        while(st<end && nums[st]==nums[st+1])
+                        st++;
+                        while(st<end && nums[end]==nums[end-1])
+                        end--;
+                        st++;
+                        end--;
                     } else if (sum < target) {
-                        p++;
+                        st++;
 
                     } else {
-                        q--;
+                        end--;
                     }
                 }
-                j++;
-                while (j < n && nums[j] == nums[j - 1])
-                    j++;
+                
             }
         }
-        return ans;
+        return vec;
     }
 };
