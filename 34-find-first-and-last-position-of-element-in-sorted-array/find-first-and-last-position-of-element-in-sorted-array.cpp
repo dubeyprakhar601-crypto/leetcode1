@@ -1,24 +1,26 @@
 class Solution {
 public:
-int lowerBound(vector<int>& nums, int target){
+int firstOccurrence(vector<int>& nums, int target){
     int n=nums.size();
     int st=0;
     int end=n-1;
     int ans=n;
     while(st<=end){
         int mid=st+(end-st)/2;
-
-        if(target<=nums[mid]){
+        if(target==nums[mid]){
             ans=mid;
             end=mid-1;
 
+        }
+        else if(target<nums[mid]){
+            end=mid-1;
         }else{
             st=mid+1;
         }
     }
     return ans;
 }
-int upperBound(vector<int>& nums, int target){
+int lastOccurrence(vector<int>& nums, int target){
     int n=nums.size();
     int st=0;
     int end=n-1;
@@ -26,9 +28,12 @@ int upperBound(vector<int>& nums, int target){
     while(st<=end){
         int mid=st+(end-st)/2;
 
-        if(target<nums[mid]){
-            end=mid-1;
+        if(target==nums[mid]){
             ans=mid;
+            st=mid+1;
+        }else if(target<nums[mid]){
+            end=mid-1;
+
         }else{
             st=mid+1;
         }
@@ -36,15 +41,14 @@ int upperBound(vector<int>& nums, int target){
     return ans;
 }
     vector<int> searchRange(vector<int>& nums, int target) {
-        int lb=lowerBound(nums,target);
-        if(lb==nums.size() || nums[lb]!=target) return {-1,-1};
-        int up=upperBound(nums,target);
+        int n=nums.size();
+        int first=firstOccurrence(nums,target);
+        int last=lastOccurrence(nums,target);
+        if(first==n) return {-1,-1};
+        return {first,last};
 
 
-        return {lb,up-1};
 
-
-
-       
+        
     }
 };
