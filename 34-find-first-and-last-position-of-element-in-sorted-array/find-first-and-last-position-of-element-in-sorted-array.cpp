@@ -4,7 +4,7 @@ int firstOccurrence(vector<int>& nums, int target){
     int n=nums.size();
     int st=0;
     int end=n-1;
-    int ans=n;
+    int ans=-1;
     while(st<=end){
         int mid=st+(end-st)/2;
         if(target==nums[mid]){
@@ -24,7 +24,7 @@ int lastOccurrence(vector<int>& nums, int target){
     int n=nums.size();
     int st=0;
     int end=n-1;
-    int ans=n;
+    int ans=-1;
     while(st<=end){
         int mid=st+(end-st)/2;
 
@@ -44,7 +44,6 @@ int lastOccurrence(vector<int>& nums, int target){
         int n=nums.size();
         int first=firstOccurrence(nums,target);
         int last=lastOccurrence(nums,target);
-        if(first==n) return {-1,-1};
         return {first,last};
 
 
