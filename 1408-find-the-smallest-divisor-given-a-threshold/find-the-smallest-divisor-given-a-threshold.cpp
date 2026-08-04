@@ -11,11 +11,9 @@ bool isValid(vector<int>& nums, int threshold,int mid){
         
         int n=nums.size();
         int st=1;
-        int end=INT_MAX;
+        int end=*max_element(nums.begin(),nums.end());
         int ans=0;
-        for(int i=0;i<n;i++){
-            end=max(nums[i],end);
-        }
+        
         while(st<=end){
             int mid=st+(end-st)/2;
 
