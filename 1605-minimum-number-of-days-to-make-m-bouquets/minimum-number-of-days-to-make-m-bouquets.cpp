@@ -41,10 +41,8 @@ long long noOFBou(vector<int>& nums, int k, int mid){
                 low=mid+1;
             }
         }
-        if(ans!=0){
-            return ans;
-        }
-        return -1;
+        
+        return ans;
         
     }
 };
