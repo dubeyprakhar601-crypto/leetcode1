@@ -1,6 +1,6 @@
 class Solution {
 public:
-long long noOFBou(vector<int>& nums, int k, int mid){
+bool noOFBou(vector<int>& nums, int k, int mid,int m){
     int i=0;
     int x=0;
     int ans=0;
@@ -16,7 +16,7 @@ long long noOFBou(vector<int>& nums, int k, int mid){
         }
         i++;
     }
-    return ans;
+    return ans>=m;
 
 }
     int minDays(vector<int>& nums, int m, int k) {
@@ -31,8 +31,8 @@ long long noOFBou(vector<int>& nums, int k, int mid){
         int ans=0;
         while(low<=high){
             int mid=low+(high-low)/2;
-            long long x=noOFBou(nums,k,mid);
-            if(x>=m){
+            
+            if(noOFBou(nums,k,mid,m)){
                 ans=mid;
                 high=mid-1;
 
