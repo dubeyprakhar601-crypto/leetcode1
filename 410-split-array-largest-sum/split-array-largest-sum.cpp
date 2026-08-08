@@ -22,18 +22,16 @@ bool noOfSubarray(vector<int>& nums, int k,int maxSum){
         for(int i=0;i<n;i++){
             end+=nums[i];
         }
-        int ans=0;
         while(st<=end){
             int mid=st+(end-st)/2;
             if(noOfSubarray(nums,k,mid)){
-                ans=mid;
                 end=mid-1;
 
             }else{
                 st=mid+1;
 
             }
-        }return ans;
+        }return st;
         
     }
 };
