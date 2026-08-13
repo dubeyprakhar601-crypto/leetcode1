@@ -5,12 +5,10 @@ public:
         int n=nums.length();
         string ans="";
         for(int i=n-1;i>=0;i--){
-            if(nums[i]%2==0){
-                nums.pop_back();
+            if(nums[i]%2==1){
+                return nums.substr(0,i+1);
             }
-            else{
-                return nums;
-            }
+            
         }
         return ans;
     }
