@@ -12,16 +12,17 @@ public:
               mp['M']=1000;
               int n=s.length();
               int i=n-1;
-              int j=n-1;
+              int pre=0;
               int val=0;
               while(i>=0){
-                if(mp[s[i]]<mp[s[j]]){
+                if(mp[s[i]]<pre){
                     val-=mp[s[i]];
                 }
                 else{
                     val+=mp[s[i]];
-                    j=i;
+                   
                 }
+                 pre=mp[s[i]];
                 i--;
               }
               return val;
