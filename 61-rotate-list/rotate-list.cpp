@@ -14,31 +14,26 @@ public:
         if(head==nullptr || head->next==nullptr){
             return head;
         }
-        int Len=0;
+        int Len=1;
         ListNode* temp=head;
-        while(temp!=nullptr){
+        while(temp->next!=nullptr){
             Len++;
             temp=temp->next;
+
         }
-        k=k%Len;
-        
-        ListNode* slow=head;
-        ListNode* fast=head;
-        while(fast!=nullptr){
-             if(k==0){
+        temp->next=head;
+        temp=head;
+        int h=Len-(k%Len);
+        while(temp!=nullptr){
+            h--;
+            if(h==0){
                 break;
             }
-            k--;
-            fast=fast->next;
-           
+            temp=temp->next;
         }
-        while(fast->next!=nullptr){
-            slow=slow->next;
-            fast=fast->next;
-        }
-        fast->next=head;
-        ListNode* newHead=slow->next;
-        slow->next=nullptr;
-        return newHead;
+        head=temp->next;
+        temp->next=nullptr;
+        return head;
+        
     }
 };
