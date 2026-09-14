@@ -11,7 +11,7 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head==nullptr || head->next==nullptr){
+        if(head==nullptr || head->next==nullptr || k==0){
             return head;
         }
         int Len=1;
@@ -24,6 +24,9 @@ public:
         temp->next=head;
         temp=head;
         int h=Len-(k%Len);
+        if(h==0){
+            return head;
+        }
         while(temp!=nullptr){
             h--;
             if(h==0){
