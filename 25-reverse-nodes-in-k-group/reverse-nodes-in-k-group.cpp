@@ -10,38 +10,49 @@
  */
 class Solution {
 public:
+ ListNode* reverseList(ListNode* temp){
+    if(temp==nullptr || temp->next==nullptr){
+        return temp;
+    }
+    ListNode* newHead=reverseList(temp->next);
+    ListNode* front=temp->next;
+    front->next=temp;
+    temp->next=nullptr;
+    return newHead;
+
+ }
+ListNode* findkth(ListNode* temp,int k){
+    k-=1;
+    while(temp!=nullptr && k>0){
+        k--;
+        temp=temp->next;
+    }
+    return temp;
+}
     ListNode* reverseKGroup(ListNode* head, int k) {
-        if (head == nullptr || k == 1)
-            return head;
+        ListNode* temp=head;
+        ListNode* nextNode=nullptr;
+        ListNode* preNode=nullptr;
+        while(temp!=nullptr){
+            ListNode* kThNode=findkth(temp,k);
+            if(kThNode==nullptr){
+                if(preNode) preNode->next=temp;
+                break;
 
-        ListNode* temp = head;
-        int cnt = 0;
+            }
+            ListNode* nextNode=kThNode->next;
+            kThNode->next=nullptr;
+            kThNode=reverseList( temp);
+            if(temp==head){
+                head=kThNode;
+            }else{
+                preNode->next=kThNode;
+            }
 
-        // Check if k nodes are available
-        while (temp != nullptr && cnt < k) {
-            temp = temp->next;
-            cnt++;
+            preNode=temp;
+            temp=nextNode;
         }
-
-        // Fewer than k nodes → don't reverse
-        if (cnt < k)
-            return head;
-
-        // Reverse first k nodes
-        ListNode* prev = nullptr;
-        ListNode* curr = head;
-
-        for (int i = 0; i < k; i++) {
-            ListNode* nextNode = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nextNode;
-        }
-
-        // head is now the last node of reversed group
-        head->next = reverseKGroup(curr, k);
-
-        return prev;
+        return head;
         
     }
 };
