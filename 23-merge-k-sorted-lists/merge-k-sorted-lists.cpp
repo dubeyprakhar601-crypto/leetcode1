@@ -10,39 +10,28 @@
  */
 class Solution {
 public:
-ListNode* mergeLink(ListNode* h1,ListNode* h2){
-    ListNode* dumyNode=new ListNode(-1);
-    ListNode* temp=dumyNode;
-    while(h1!=nullptr && h2!=nullptr){
-        if(h1->val<h2->val){
-            temp->next=h1;
-            h1=h1->next;
-        }else{
-            temp->next=h2;
-            h2=h2->next;
-        }
-        temp=temp->next;
-    }
-    if(h1!=nullptr){
-        temp->next=h1;
-    }
-    if(h2!=nullptr){
-        temp->next=h2;
-    }
-    return dumyNode->next;
-}
     ListNode* mergeKLists(vector<ListNode*>& nums) {
-        if(nums.empty()){
-            return nullptr;
+        priority_queue<pair<int,ListNode*>,vector<pair<int,ListNode*>>,greater<pair<int,ListNode*>>>pq;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]){
+            pq.push({nums[i]->val,nums[i]});
+            }
         }
-        if( nums.size()==1){
-            return nums[0];
+        ListNode* dumyNode=new ListNode(-1);
+        ListNode* temp=dumyNode;
+        while(!pq.empty()){
+            auto it=pq.top();
+            temp->next=it.second;
+            temp=temp->next;
+            pq.pop();
+            ListNode* temp3=it.second->next;
+            if(temp3){
+            pq.push({temp3->val,temp3});
+            }
+
         }
-        ListNode* newHead=nums[0];
-        for(int i=1;i<nums.size();i++){
-            newHead=mergeLink(newHead,nums[i]);
-        }
-        return newHead;
+        return dumyNode->next;
+
         
     }
 };
