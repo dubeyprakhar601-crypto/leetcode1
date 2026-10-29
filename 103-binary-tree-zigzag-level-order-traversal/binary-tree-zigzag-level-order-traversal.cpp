@@ -26,7 +26,7 @@ void reverseArray(vector<int>&nums){
         }
         queue<TreeNode*>q;
         q.push(root);
-        int flag=1;
+        bool flag=true;
         while(!q.empty()){
             int size=q.size();
             vector<int>lvl;
@@ -37,13 +37,14 @@ void reverseArray(vector<int>&nums){
                 if(node->right) q.push(node->right);
                 lvl.push_back(node->val);
             }
-            if(flag%2==0){
+            if(flag){
+                ans.push_back(lvl);
+               
+            }else{
                 reverseArray(lvl);
                 ans.push_back(lvl);
-            }else{
-                ans.push_back(lvl);
             }
-            flag++;
+            flag=!flag;
 
         }
         return ans;
